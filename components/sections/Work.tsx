@@ -1,11 +1,12 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight } from "lucide-react";
 
 export default function Work() {
   const container = useRef(null);
+  const [activeWork, setActiveWork] = useState<number | null>(null);
 
   useGSAP(() => {
     // Reveal List Rows
@@ -74,13 +75,19 @@ export default function Work() {
        <div className="w-full border-b border-[#121110]/10">
          {works.map((work, i) => {
            const isEven = i % 2 === 0;
+           const isActive = activeWork === i;
+
            return (
-             <div key={i} className="work-row-anim group relative border-t border-[#121110]/10 hover:bg-[#121110]/[0.02] transition-colors duration-500 cursor-pointer">
+             <div 
+               key={i} 
+               onClick={() => setActiveWork(isActive ? null : i)}
+               className={`work-row-anim group relative border-t border-[#121110]/10 transition-colors duration-500 cursor-pointer touch-manipulation ${isActive ? 'bg-[#121110]/[0.05]' : 'hover:bg-[#121110]/[0.02]'}`}
+             >
                 <div className="max-w-[1600px] mx-auto px-6 md:px-[60px] py-16 md:py-24 flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
                    
                    {/* Metadata */}
                    <div className={`w-full lg:w-1/5 flex flex-col gap-2 ${isEven ? 'lg:order-1' : 'lg:order-3'}`}>
-                     <span className="font-mono text-[10px] text-[#C5A059] uppercase tracking-[0.3em] font-bold">0{i+1}</span>
+                     <span className={`font-mono text-[10px] uppercase tracking-[0.3em] font-bold transition-colors duration-500 ${isActive ? 'text-[#C5A059]' : 'text-[#C5A059]/50 group-hover:text-[#C5A059]'}`}>0{i+1}</span>
                      <span className="font-sans text-[12px] uppercase tracking-[0.2em] text-[#121110]/60 mt-2">{work.category}</span>
                    </div>
 
@@ -88,24 +95,24 @@ export default function Work() {
                    <div className={`w-full lg:w-3/5 relative overflow-hidden h-[50vh] lg:h-[70vh] rounded-[2px] ${isEven ? 'lg:order-2' : 'lg:order-2'}`}>
                      <img 
                        src={work.img} 
-                       className="work-parallax-img absolute top-[-15%] left-0 w-full h-[130%] object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.03] transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)]" 
+                       className={`work-parallax-img absolute top-[-15%] left-0 w-full h-[130%] object-cover transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] ${isActive ? 'grayscale-0 opacity-100 scale-[1.03]' : 'grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.03]'}`} 
                        alt={work.title} 
                        loading="lazy"
                      />
-                     <div className="absolute inset-0 bg-[#C5A059]/0 group-hover:bg-[#C5A059]/10 transition-colors duration-500 mix-blend-color-burn pointer-events-none"></div>
+                     <div className={`absolute inset-0 transition-colors duration-500 mix-blend-color-burn pointer-events-none ${isActive ? 'bg-[#C5A059]/10' : 'bg-[#C5A059]/0 group-hover:bg-[#C5A059]/10'}`}></div>
                    </div>
 
                    {/* Giant overlapping Title */}
                    <div className={`w-full lg:w-1/5 flex flex-col justify-center ${isEven ? 'lg:order-3' : 'lg:order-1'} relative z-10 mt-8 lg:mt-0`}>
-                      <h3 className={`font-serif text-[40px] sm:text-[60px] lg:text-[7vw] leading-[0.85] tracking-[-0.02em] group-hover:italic transition-all duration-500 text-[#121110] ${isEven ? 'lg:-ml-32 text-left' : 'lg:-mr-32 text-right'}`}>
+                      <h3 className={`font-serif text-[clamp(40px,10vw,48px)] sm:text-[60px] lg:text-[7vw] leading-[0.85] tracking-[-0.02em] transition-all duration-500 text-[#121110] ${isActive ? 'italic' : 'group-hover:italic'} ${isEven ? 'lg:-ml-32 text-left' : 'lg:-mr-32 text-right'}`}>
                         {work.title.split(' ').map((word, idx) => (
                            <span key={idx} className="block">{word}</span>
                         ))}
                       </h3>
-                      <div className={`mt-12 hidden lg:flex w-16 h-16 rounded-full border border-[#121110]/20 items-center justify-center group-hover:bg-[#C5A059] group-hover:border-[#C5A059] group-hover:text-white transition-all duration-500 shadow-xl ${isEven ? 'self-start' : 'self-end'}`}>
-                        <ArrowUpRight size={24} className="transform group-hover:rotate-45 transition-transform duration-500" />
+                      <div className={`mt-12 hidden lg:flex w-16 h-16 rounded-full border border-[#121110]/20 items-center justify-center transition-all duration-500 shadow-xl ${isActive ? 'bg-[#C5A059] border-[#C5A059] text-white' : 'group-hover:bg-[#C5A059] group-hover:border-[#C5A059] group-hover:text-white'} ${isEven ? 'self-start' : 'self-end'}`}>
+                        <ArrowUpRight size={24} className={`transform transition-transform duration-500 ${isActive ? 'rotate-45' : 'group-hover:rotate-45'}`} />
                       </div>
-                       <div className="lg:hidden mt-6 flex items-center text-[10px] uppercase font-bold tracking-[0.2em] text-[#C5A059] group-hover:text-[#121110]">
+                       <div className={`lg:hidden mt-6 flex items-center text-[10px] uppercase font-bold tracking-[0.2em] transition-colors ${isActive ? 'text-[#121110]' : 'text-[#C5A059] group-hover:text-[#121110]'}`}>
                           Ver Projeto <ArrowUpRight size={14} className="ml-2" />
                        </div>
                    </div>

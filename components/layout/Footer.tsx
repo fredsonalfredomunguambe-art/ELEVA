@@ -27,15 +27,17 @@ export default function Footer() {
         <div className="col-span-12 md:col-span-8 flex flex-col">
            <p className="text-[#C5A059] font-mono text-[11px] uppercase tracking-[0.3em] mb-[30px]">Pronto para dar o próximo passo?</p>
            
-           <h2 className="footer-giant-text font-serif text-[60px] sm:text-[80px] md:text-[120px] lg:text-[160px] leading-[0.8] tracking-[-0.04em] mb-12 text-[#EFECE6] transform-origin-top-left">
-             <span className="italic block">Vamos</span>
-             Começar.
-           </h2>
+           <a href="mailto:hello@eleva.pt" className="group/footer-title">
+             <h2 className="footer-giant-text font-serif text-[60px] sm:text-[80px] md:text-[120px] lg:text-[160px] leading-[0.8] tracking-[-0.04em] mb-12 text-[#EFECE6] transform-origin-top-left transition-all duration-700 group-hover/footer-title:text-[#C5A059] group-hover/footer-title:italic">
+               <span className="italic block">Vamos</span>
+               Começar.
+             </h2>
+           </a>
            
            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-[30px] mb-12 sm:mb-24 mt-8 w-full">
-             <button className="magnetic-btn bg-[#C5A059] text-[12px] font-bold text-[#121110] uppercase tracking-[0.1em] rounded-[2px] px-[40px] py-[22px] transition-all duration-500 hover:bg-[#EFECE6] inline-flex items-center w-full sm:w-auto justify-center">
+             <a href="mailto:hello@eleva.pt" className="magnetic-btn bg-[#C5A059] text-[12px] font-bold text-[#121110] uppercase tracking-[0.1em] rounded-[2px] px-[40px] py-[22px] transition-all duration-500 hover:bg-[#EFECE6] hover:scale-105 inline-flex items-center w-full sm:w-auto justify-center">
                Falar Connosco <ArrowUpRight size={16} className="inline ml-2" />
-             </button>
+             </a>
              <div className="flex flex-col space-y-2">
                <span className="text-[#EFECE6]/50 font-mono text-[10px] uppercase tracking-[0.2em]">Contacte-nos</span>
                <a href="mailto:hello@eleva.pt" className="text-[#EFECE6] text-[16px] md:text-[20px] font-serif italic border-b border-[#C5A059] pb-1 hover:text-[#C5A059] transition-colors">
@@ -61,9 +63,9 @@ export default function Footer() {
       <div className="w-full max-w-[1600px] mx-auto mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-[10px] text-[#EFECE6]/40 uppercase tracking-[0.1em] border-t border-[#EFECE6]/10 pt-[40px] text-left z-10 items-center">
         <p className="order-3 md:order-1 mt-4 md:mt-0 text-center md:text-left">2026 © ELEVA Studio. Todos os Direitos Reservados.</p>
         <div className="order-1 md:order-2 md:text-center text-[#C5A059] flex items-center justify-center md:justify-center gap-4">
-          <span>Instagram</span>
-          <span>Behance</span>
-          <span>LinkedIn</span>
+          <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-[#EFECE6] transition-colors">Instagram</a>
+          <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-[#EFECE6] transition-colors">Behance</a>
+          <a href="#" target="_blank" rel="noopener noreferrer" className="hover:text-[#EFECE6] transition-colors">LinkedIn</a>
         </div>
         <div className="order-2 md:order-3 text-center md:text-right">
           Otimizado para Resultados

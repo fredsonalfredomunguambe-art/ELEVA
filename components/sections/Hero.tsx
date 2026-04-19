@@ -45,7 +45,7 @@ export default function Hero() {
       }
     });
 
-    // Elite Continuous Animations
+    // Continuous rotation for spin text
     gsap.to(gsap.utils.toArray('.spin-text'), {
       rotation: 360,
       duration: 20,
@@ -62,7 +62,7 @@ export default function Hero() {
       ease: "sine.inOut"
     });
 
-    // Magnetic logic
+    // Magnetic interaction - optimized for performance
     const magnets = gsap.utils.toArray('.magnetic-btn') as HTMLElement[];
     magnets.forEach((btn) => {
       btn.addEventListener('mousemove', (e: MouseEvent) => {
@@ -80,82 +80,76 @@ export default function Hero() {
   const title = "ELEVA.".split("");
 
   return (
-    <section ref={container} className="relative h-[100svh] w-full flex flex-col items-center justify-center px-6 pt-24 pb-8 md:pb-12 bg-[#C5A059] overflow-hidden rounded-b-[40px] md:rounded-b-[80px] z-20 transition-colors duration-1000">
+    <section ref={container} className="relative min-h-[100svh] w-full flex flex-col items-center justify-center px-6 pt-24 pb-12 md:pb-20 bg-[#C5A059] overflow-hidden rounded-b-[40px] md:rounded-b-[80px] z-20">
 
-      {/* Background massive typography */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden opacity-10 z-0">
-        <span className="font-serif text-[40vw] leading-none whitespace-nowrap text-[#121110]">ELEVA</span>
+      {/* Background massive typography - perfectly centered */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden opacity-[0.08] z-0">
+        <span className="font-serif text-[45vw] leading-none whitespace-nowrap text-[#121110]">ELEVA</span>
       </div>
 
-      {/* Central Architectural Image Cutout */}
-      <div className="hero-image-wrap absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] md:w-[35vw] h-[65svh] overflow-hidden rounded-t-full border border-[#121110]/10 z-10 bg-[#EFECE6] shadow-2xl shadow-black/20">
+      {/* Central Architectural Image Cutout - sized for all viewports */}
+      <div className="hero-image-wrap absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[85vw] sm:w-[70vw] md:w-[45vw] lg:w-[35vw] h-[60svh] md:h-[65svh] overflow-hidden rounded-t-full border border-[#121110]/10 z-10 bg-[#EFECE6] shadow-2xl shadow-black/20">
         <img
           src="/fotos/hero imagem.jpeg"
           alt="Eleva Hero"
           className="hero-image w-[120%] h-[120%] object-cover object-center absolute -top-[10%] -left-[10%] opacity-90"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#C5A059] via-transparent to-transparent opacity-100"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#C5A059] via-transparent to-transparent opacity-80"></div>
       </div>
 
       {/* Foreground Content */}
-      <div className="relative z-20 w-full max-w-[1600px] h-full flex flex-col justify-between items-center text-center">
+      <div className="relative z-20 w-full max-w-[1700px] h-full flex flex-col justify-between items-center text-center py-12">
 
-        <div className="mt-12 md:mt-24"></div>
+        <div className="mt-8 md:mt-16 invisible md:visible"></div>
 
-        <h1 className="font-serif text-[20vw] lg:text-[14vw] leading-[0.8] tracking-[-0.02em] flex overflow-hidden mix-blend-color-burn text-[#121110] pointer-events-none mt-8 md:mt-12">
+        <h1 className="font-serif text-[clamp(80px,22vw,350px)] lg:text-[14vw] leading-[0.75] tracking-[-0.03em] flex flex-wrap justify-center overflow-hidden mix-blend-color-burn text-[#121110] pointer-events-none mt-16 md:mt-24">
           {title.map((char, i) => (
-            <span key={i} className="hero-char inline-block" style={{ transformOrigin: "bottom center" }}>
+            <span key={i} className="hero-char inline-block px-[0.01em]" style={{ transformOrigin: "bottom center" }}>
               {char}
             </span>
           ))}
         </h1>
 
-        <div className="flex flex-col md:flex-row justify-between items-end w-full pb-8 md:pb-4 gap-12 md:gap-0 relative z-20">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end w-full mt-auto pt-16 gap-12 md:gap-0 relative z-30">
           
-          <div className="hero-sub flex flex-col items-start w-full md:w-1/3 order-3 md:order-1">
-            <div className="flex items-center gap-3 mb-3">
-              <span className="text-[9px] uppercase font-mono tracking-[0.3em] text-[#121110]/50">
-                Localização
-              </span>
-              <div className="w-4 h-[1px] bg-[#121110]/30"></div>
-            </div>
-            <p className="text-[10px] md:text-[11px] text-[#121110]/80 uppercase tracking-[0.2em] font-mono leading-[1.6]">
-              Sediados em Portugal<br />Alcance Global
-            </p>
-          </div>
+          {/* Spacer to balance layout on desktop */}
+          <div className="hidden md:block w-1/3"></div>
 
-          <div className="w-full md:w-1/3 flex justify-start md:justify-center order-1 md:order-2">
-            <a href="#contacto" className="hero-sub magnetic-btn hidden md:flex w-32 h-32 rounded-full items-center justify-center text-[#121110] relative group group-hover:scale-105 transition-transform duration-500">
-              {/* Spinning text ring */}
-              <div className="absolute inset-0 w-full h-full spin-text pointer-events-none">
-                <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible opacity-70">
-                  <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
-                  <text className="text-[8.5px] uppercase font-mono tracking-[0.25em] fill-current">
-                    <textPath href="#circlePath" startOffset="0%">
-                      DESCUBRA O NOSSO TRABALHO • DESCUBRA O NOSSO TRABALHO • 
+          {/* Central Call to Action */}
+          <div className="w-full md:w-1/3 flex justify-center order-1 md:order-2">
+            <a href="#contacto" className="hero-sub flex w-28 h-28 md:w-36 md:h-36 rounded-full items-center justify-center text-[#121110] relative group cursor-pointer touch-manipulation">
+              {/* Elegant curved textbadge */}
+              <div className="absolute inset-0 w-full h-full pointer-events-none transition-transform duration-[1.5s] ease-out group-hover:rotate-180">
+                <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
+                  <path id="curve" d="M 20, 50 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0" fill="none" />
+                  <text className="text-[7.5px] uppercase font-mono tracking-[0.25em] fill-[#121110]/80">
+                    <textPath href="#curve" startOffset="0%">
+                      • DESCUBRA O NOSSO TRABALHO • DESCUBRA O NOSSO TRABALHO
                     </textPath>
                   </text>
                 </svg>
               </div>
-              {/* Inner button */}
-              <div className="w-14 h-14 rounded-full border border-[#121110]/20 flex items-center justify-center group-hover:bg-[#121110] group-hover:text-[#C5A059] transition-colors duration-500 bg-[#EFECE6]/30 backdrop-blur-md">
-                <ArrowDown size={20} strokeWidth={1} />
+              
+              {/* Floating button core */}
+              <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-[#121110]/20 flex items-center justify-center bg-[#EFECE6]/40 backdrop-blur-md group-hover:bg-[#121110] group-hover:text-[#C5A059] group-active:scale-90 transition-all duration-500 z-10 shadow-lg">
+                <ArrowDown size={24} strokeWidth={1} className="group-hover:translate-y-1 transition-transform duration-500" />
               </div>
             </a>
           </div>
 
-          <div className="hero-sub flex flex-col items-start md:items-end text-left md:text-right w-full md:w-1/3 order-2 md:order-3 pt-6 md:pt-0">
-            <div className="flex items-center md:flex-row-reverse gap-3 mb-3">
-              <span className="text-[9px] uppercase font-mono tracking-[0.3em] text-[#121110]/50">
+          {/* Value Proposition */}
+          <div className="hero-sub flex flex-col items-center md:items-end text-center md:text-right w-full md:w-1/3 order-2 md:order-3">
+            <div className="flex items-center md:flex-row-reverse gap-3 mb-4">
+              <span className="text-[10px] uppercase font-mono tracking-[0.3em] text-[#121110]/60 font-medium">
                 O Que Fazemos
               </span>
-              <div className="w-4 h-[1px] bg-[#121110]/30"></div>
+              <div className="w-6 h-[1px] bg-[#121110]/30 hidden md:block"></div>
             </div>
-            <div className="text-[10px] md:text-[11px] leading-[1.8] text-[#121110]/80 uppercase tracking-[0.1em] max-w-[280px]">
+            <div className="text-[11px] md:text-[12px] leading-[1.8] text-[#121110]/90 uppercase tracking-[0.1em] max-w-[300px] px-4 md:px-0">
               Sites profissionais <br className="hidden md:block"/>
               e presença digital forte, <br className="hidden md:block"/>
               tudo pensado para fazer crescer <br className="hidden md:block"/>
-              <span className="text-[#121110] font-serif italic normal-case text-[16px] md:text-[18px]">
+              <span className="text-[#121110] font-serif italic normal-case text-[18px] md:text-[22px] block mt-1">
                 o seu negócio.
               </span>
             </div>
