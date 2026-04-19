@@ -10,10 +10,15 @@ export default function Hero() {
   useGSAP(() => {
     const tl = gsap.timeline();
 
-    // Superior Preloader Animation (Cassie Evans style)
+    // Superior Preloader Animation
     tl.to(".preloader-text", { y: 0, duration: 1, ease: "expo.out", delay: 0.2 })
       .to(".preloader-text", { y: -100, opacity: 0, duration: 0.8, ease: "expo.in", delay: 0.4 })
-      .to(document.querySelector(".preloader-overlay"), { height: 0, duration: 1.2, ease: "power4.inOut" }, "-=0.2")
+      .to(document.querySelector(".preloader-overlay"), { 
+        opacity: 0, 
+        autoAlpha: 0, 
+        duration: 1.2, 
+        ease: "power4.inOut" 
+      }, "-=0.2")
       // Spectacular Hero Entrance
       .fromTo(".hero-image-wrap",
         { scale: 1.2, opacity: 0, y: 100 },
@@ -47,23 +52,6 @@ export default function Hero() {
       ease: "none",
       repeat: -1
     });
-
-    const words = gsap.utils.toArray('.dynamic-word') as HTMLElement[];
-    if (words.length > 0) {
-      gsap.set(words.slice(1), { y: 20, opacity: 0 });
-      gsap.set(words[0], { y: 0, opacity: 1 });
-      
-      const wordTl = gsap.timeline({ repeat: -1 });
-      
-      words.forEach((word, index) => {
-        const nextWord = words[(index + 1) % words.length];
-        wordTl.to(word, { y: -20, opacity: 0, duration: 0.8, ease: "power3.inOut" }, "+=2.5")
-              .fromTo(nextWord, 
-                { y: 20, opacity: 0 }, 
-                { y: 0, opacity: 1, duration: 0.8, ease: "power3.inOut" }, 
-                "<");
-      });
-    }
 
     // Continuous breathing effect for the hero image
     gsap.to(".hero-image", {
@@ -166,15 +154,9 @@ export default function Hero() {
             <div className="text-[10px] md:text-[11px] leading-[1.8] text-[#121110]/80 uppercase tracking-[0.1em] max-w-[280px]">
               Sites profissionais <br className="hidden md:block"/>
               e presença digital forte, <br className="hidden md:block"/>
-              tudo pensado para fazer crescer <span className="relative inline-flex h-[1.5em] w-[120px] md:w-[140px] overflow-visible align-bottom">
-                {["o seu negócio.", "a sua marca.", "a sua visão.", "os seus resultados."].map((word, i) => (
-                  <span 
-                    key={i} 
-                    className={`dynamic-word absolute bottom-0 left-0 md:left-auto md:right-0 md:text-right text-[#121110] font-serif italic normal-case text-[16px] md:text-[18px] tracking-normal w-full ${i === 0 ? 'opacity-100' : 'opacity-0'}`}
-                  >
-                    {word}
-                  </span>
-                ))}
+              tudo pensado para fazer crescer <br className="hidden md:block"/>
+              <span className="text-[#121110] font-serif italic normal-case text-[16px] md:text-[18px]">
+                o seu negócio.
               </span>
             </div>
           </div>
