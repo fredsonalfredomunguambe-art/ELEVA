@@ -33,21 +33,21 @@ export default function Work() {
 
   }, { scope: container });
 
-  const works = [
+  const works: Array<{ title: string; category: string; img?: string; video?: string }> = [
     {
-      title: "Arquitetura H&M",
+      title: "EC Agência",
       category: "Web Design . Desenvolvimento",
-      img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+      video: "/video/ec%20group.mp4"
     },
     {
-      title: "Finanças Alpha",
+      title: "Yogurtea",
       category: "Redesign . Conteúdo",
-      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
+      video: "/video/yogurtea.mp4"
     },
     {
-      title: "Consultora Strat",
+      title: "Casa Norte Studio",
       category: "Estratégia . Web Design",
-      img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop"
+      video: "/video/Casa%20Norte%20Estudio.mp4"
     },
     {
       title: "Oceano Saúde",
@@ -91,15 +91,31 @@ export default function Work() {
                      <span className="font-sans text-[12px] uppercase tracking-[0.2em] text-[#121110]/60 mt-2">{work.category}</span>
                    </div>
 
-                   {/* Editorial Image Frame */}
-                   <div className={`w-full lg:w-3/5 relative overflow-hidden h-[50vh] lg:h-[70vh] rounded-[2px] ${isEven ? 'lg:order-2' : 'lg:order-2'}`}>
-                     <img 
-                       src={work.img} 
-                       className={`work-parallax-img absolute top-[-15%] left-0 w-full h-[130%] object-cover transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] ${isActive ? 'grayscale-0 opacity-100 scale-[1.03]' : 'grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.03]'}`} 
-                       alt={work.title} 
-                       loading="lazy"
-                     />
-                     <div className={`absolute inset-0 transition-colors duration-500 mix-blend-color-burn pointer-events-none ${isActive ? 'bg-[#C5A059]/10' : 'bg-[#C5A059]/0 group-hover:bg-[#C5A059]/10'}`}></div>
+                   {/* Editorial Image/Video Frame */}
+                   <div className={`w-full lg:w-3/5 relative h-[50vh] lg:h-[70vh] rounded-[2px] ${isEven ? 'lg:order-2' : 'lg:order-2'} ${work.video ? '' : 'overflow-hidden'}`}>
+                     {work.video ? (
+                       <div className={`absolute inset-0 flex items-center justify-center transition-colors duration-1000 rounded-[2px] p-4 sm:p-8 lg:p-12 ${isActive ? 'bg-[#121110]/10' : 'bg-[#121110]/5 group-hover:bg-[#121110]/10'}`}>
+                         <div className={`relative flex items-center justify-center h-full w-full`}>
+                           <div className={`relative overflow-hidden rounded-xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] border-2 border-[#121110]/5 bg-[#121110] ${isActive ? 'scale-100' : 'scale-[0.96] group-hover:scale-100'}`}>
+                             <video 
+                               src={work.video} 
+                               autoPlay loop muted playsInline
+                               className={`w-full h-full max-h-[40vh] lg:max-h-[55vh] object-contain transition-all duration-1000 ${isActive ? 'grayscale-0 opacity-100' : 'grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100'}`} 
+                             />
+                           </div>
+                         </div>
+                       </div>
+                     ) : (
+                       <>
+                         <img 
+                           src={work.img} 
+                           className={`work-parallax-img absolute top-[-15%] left-0 w-full h-[130%] object-cover transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] ${isActive ? 'grayscale-0 opacity-100 scale-[1.03]' : 'grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.03]'}`} 
+                           alt={work.title} 
+                           loading="lazy"
+                         />
+                         <div className={`absolute inset-0 transition-colors duration-500 mix-blend-color-burn pointer-events-none ${isActive ? 'bg-[#C5A059]/10' : 'bg-[#C5A059]/0 group-hover:bg-[#C5A059]/10'}`}></div>
+                       </>
+                     )}
                    </div>
 
                    {/* Giant overlapping Title */}
