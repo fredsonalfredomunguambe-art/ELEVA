@@ -1,8 +1,39 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight } from "lucide-react";
+
+/** Component to lazy-play video only when visible in viewport */
+function WorkVideo({ src, isActive }: { src: string; isActive: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          videoRef.current?.play().catch(() => {});
+        } else {
+          videoRef.current?.pause();
+        }
+      });
+    }, { threshold: 0.2 });
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video 
+      ref={videoRef}
+      src={src} 
+      loop muted playsInline preload="metadata"
+      className={`w-full h-full max-h-[40vh] lg:max-h-[55vh] object-contain transition-all duration-1000 ${isActive ? 'grayscale-0 opacity-100' : 'grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100'}`} 
+    />
+  );
+}
 
 export default function Work() {
   const container = useRef(null);
@@ -97,11 +128,7 @@ export default function Work() {
                        <div className={`absolute inset-0 flex items-center justify-center transition-colors duration-1000 rounded-[2px] p-4 sm:p-8 lg:p-12 ${isActive ? 'bg-[#121110]/10' : 'bg-[#121110]/5 group-hover:bg-[#121110]/10'}`}>
                          <div className={`relative flex items-center justify-center h-full w-full`}>
                            <div className={`relative overflow-hidden rounded-xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.3)] transition-all duration-1000 ease-[cubic-bezier(0.19,1,0.22,1)] border-2 border-[#121110]/5 bg-[#121110] ${isActive ? 'scale-100' : 'scale-[0.96] group-hover:scale-100'}`}>
-                             <video 
-                               src={work.video} 
-                               autoPlay loop muted playsInline
-                               className={`w-full h-full max-h-[40vh] lg:max-h-[55vh] object-contain transition-all duration-1000 ${isActive ? 'grayscale-0 opacity-100' : 'grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100'}`} 
-                             />
+                             <WorkVideo src={work.video} isActive={isActive} />
                            </div>
                          </div>
                        </div>
