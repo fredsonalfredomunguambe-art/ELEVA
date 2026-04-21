@@ -2,9 +2,11 @@
 import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Testimonials() {
   const container = useRef(null);
+  const { t } = useLanguage();
 
   useGSAP(() => {
     gsap.fromTo(".quote-mark",
@@ -28,12 +30,21 @@ export default function Testimonials() {
       
       <div className="relative z-10 max-w-[1200px] mx-auto flex flex-col items-center text-center">
         <p className="font-mono text-[11px] uppercase tracking-[0.3em] font-bold mb-12 border border-[#0C0C0C]/20 rounded-[4px] px-6 py-2">
-          O Que Dizem de Nós
+          {t("O Que Dizem de Nós", "What They Say About Us")}
         </p>
         
         <h2 className="testimonial-text font-serif text-[40px] sm:text-[60px] md:text-[80px] leading-[1.1] tracking-[-0.02em] font-medium max-w-5xl">
-          &quot;Confiámos-lhes a missão de mudar a forma como os nossos clientes nos viam online. O resultado superou tudo: um 
-          <span className="italic"> aumento enorme de </span>contactos qualificados e novas oportunidades de negócio.&quot;
+          {t(
+            `"Confiámos-lhes a missão de mudar a forma como os nossos clientes nos viam online. O resultado superou tudo: um `,
+            `"We trusted them with the mission of changing how our clients perceived us online. The result surpassed everything: a `
+          )}
+          <span className="italic">
+            {t("aumento enorme de ", "massive increase in ")}
+          </span>
+          {t(
+            `contactos qualificados e novas oportunidades de negócio."`,
+            `qualified leads and new business opportunities."`
+          )}
         </h2>
         
         <div className="mt-16 flex flex-col items-center gap-4">

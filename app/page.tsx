@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 
+import { LanguageProvider } from "@/context/LanguageContext";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -44,6 +45,7 @@ export default function Home() {
   }, []);
 
   return (
+    <LanguageProvider>
     <main ref={mainRef} className="relative min-h-screen bg-[#121110] selection:bg-[#C5A059] selection:text-[#121110] overflow-hidden font-sans">
       {/* Noise Texture Overlay for Editorial Print Feel */}
       <div
@@ -72,5 +74,6 @@ export default function Home() {
       <Faq />
       <Footer />
     </main>
+    </LanguageProvider>
   );
 }

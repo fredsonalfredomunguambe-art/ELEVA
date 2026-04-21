@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 /** Component to lazy-play video only when visible in viewport */
 function WorkVideo({ src, isActive }: { src: string; isActive: boolean }) {
@@ -38,6 +39,7 @@ function WorkVideo({ src, isActive }: { src: string; isActive: boolean }) {
 export default function Work() {
   const container = useRef(null);
   const [activeWork, setActiveWork] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   useGSAP(() => {
     // Reveal List Rows
@@ -67,22 +69,22 @@ export default function Work() {
   const works: Array<{ title: string; category: string; img?: string; video?: string }> = [
     {
       title: "EC Agência",
-      category: "Web Design . Desenvolvimento",
+      category: t("Web Design . Desenvolvimento", "Web Design . Development"),
       video: "/video/ec%20group.mp4"
     },
     {
       title: "Yogurtea",
-      category: "Redesign . Conteúdo",
+      category: t("Redesign . Conteúdo", "Redesign . Content"),
       video: "/video/yogurtea.mp4"
     },
     {
       title: "Casa Norte Studio",
-      category: "Estratégia . Web Design",
+      category: t("Estratégia . Web Design", "Strategy . Web Design"),
       video: "/video/Casa%20Norte%20Estudio.mp4"
     },
     {
       title: "Oceano Saúde",
-      category: "Desenvolvimento . SEO",
+      category: t("Desenvolvimento . SEO", "Development . SEO"),
       img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
     }
   ];
@@ -94,10 +96,10 @@ export default function Work() {
        <div className="px-6 md:px-[60px] max-w-[1600px] mx-auto mb-20 md:mb-32">
          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-[#121110]/10 pb-12">
            <h2 className="font-serif text-[60px] md:text-[100px] lg:text-[130px] leading-[0.8] tracking-[-0.04em] text-[#121110]">
-              Os Nossos<br/><span className="italic text-[#C5A059]">Projetos.</span>
+              {t("Os Nossos", "Our")}<br/><span className="italic text-[#C5A059]">{t("Projetos.", "Projects.")}</span>
             </h2>
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#121110]/50 max-w-[200px] text-left md:text-right">
-              Trabalhos que mostram a diferença que fazemos.
+              {t("Trabalhos que mostram a diferença que fazemos.", "Work that shows the difference we make.")}
             </p>
          </div>
        </div>
@@ -156,7 +158,7 @@ export default function Work() {
                         <ArrowUpRight size={24} className={`transform transition-transform duration-500 ${isActive ? 'rotate-45' : 'group-hover:rotate-45'}`} />
                       </div>
                        <div className={`lg:hidden mt-6 flex items-center text-[10px] uppercase font-bold tracking-[0.2em] transition-colors ${isActive ? 'text-[#121110]' : 'text-[#C5A059] group-hover:text-[#121110]'}`}>
-                          Ver Projeto <ArrowUpRight size={14} className="ml-2" />
+                          {t("Ver Projeto", "View Project")} <ArrowUpRight size={14} className="ml-2" />
                        </div>
                    </div>
 

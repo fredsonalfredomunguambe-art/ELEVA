@@ -3,10 +3,12 @@ import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, Plus, Minus } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Services() {
   const container = useRef(null);
   const [activeService, setActiveService] = useState<number | null>(null);
+  const { t } = useLanguage();
   
   useGSAP(() => {
     gsap.fromTo(".panel-item", 
@@ -26,10 +28,38 @@ export default function Services() {
   }, { scope: container });
 
   const services = [
-    { tag: "01", title: "Design que Transmite Confiança", desc: "Cada detalhe visual é pensado para que o seu negócio transmita profissionalismo e credibilidade desde o primeiro olhar. Um bom design não é apenas bonito — é uma ferramenta que inspira confiança e destaca o seu valor no mercado." },
-    { tag: "02", title: "Textos que Convencem", desc: "Conhecemos o seu público. Escrevemos mensagens claras e persuasivas que captam a atenção, eliminam dúvidas e motivam os visitantes a entrar em contacto ou a comprar. Cada palavra tem um propósito." },
-    { tag: "03", title: "Navegação Intuitiva", desc: "Um site confuso perde visitantes. Criamos experiências de navegação fluidas e naturais, com animações subtis que guiam o utilizador até à ação que importa — seja contactar, orçamentar ou comprar." },
-    { tag: "04", title: "Resultados Concretos", desc: "Um site bonito que não traz clientes é apenas decoração. Otimizamos cada página para gerar mais visibilidade nos motores de busca, mais contactos e mais negócio real — enquanto a sua marca brilha online." }
+    { 
+      tag: "01", 
+      title: t("Design que Transmite Confiança", "Design That Builds Trust"), 
+      desc: t(
+        "Cada detalhe visual é pensado para que o seu negócio transmita profissionalismo e credibilidade desde o primeiro olhar. Um bom design não é apenas bonito — é uma ferramenta que inspira confiança e destaca o seu valor no mercado.",
+        "Every visual detail is crafted so your business conveys professionalism and credibility at first glance. Great design isn't just beautiful — it's a tool that inspires trust and highlights your value in the market."
+      )
+    },
+    { 
+      tag: "02", 
+      title: t("Textos que Convencem", "Copy That Converts"), 
+      desc: t(
+        "Conhecemos o seu público. Escrevemos mensagens claras e persuasivas que captam a atenção, eliminam dúvidas e motivam os visitantes a entrar em contacto ou a comprar. Cada palavra tem um propósito.",
+        "We know your audience. We write clear, persuasive messages that capture attention, eliminate doubts, and motivate visitors to get in touch or buy. Every word has a purpose."
+      )
+    },
+    { 
+      tag: "03", 
+      title: t("Navegação Intuitiva", "Intuitive Navigation"), 
+      desc: t(
+        "Um site confuso perde visitantes. Criamos experiências de navegação fluidas e naturais, com animações subtis que guiam o utilizador até à ação que importa — seja contactar, orçamentar ou comprar.",
+        "A confusing site loses visitors. We create smooth, natural navigation experiences with subtle animations that guide users to the action that matters — whether that's contacting, quoting, or purchasing."
+      )
+    },
+    { 
+      tag: "04", 
+      title: t("Resultados Concretos", "Concrete Results"), 
+      desc: t(
+        "Um site bonito que não traz clientes é apenas decoração. Otimizamos cada página para gerar mais visibilidade nos motores de busca, mais contactos e mais negócio real — enquanto a sua marca brilha online.",
+        "A beautiful site that doesn't bring clients is just decoration. We optimise every page to generate more search engine visibility, more leads, and more real business — while your brand shines online."
+      )
+    }
   ];
 
   return (
@@ -41,14 +71,17 @@ export default function Services() {
           <div>
             <div className="text-[10px] md:text-[11px] font-mono uppercase tracking-[0.3em] mb-4 flex items-center gap-3 text-[#121110]/50 font-bold">
               <span className="w-8 h-[1px] bg-[#121110]/30"></span>
-              O Que Fazemos
+              {t("O Que Fazemos", "What We Do")}
             </div>
             <h2 className="font-serif text-[clamp(40px,8vw,80px)] leading-[0.9] tracking-[-0.03em] text-[#121110]">
-              As Nossas<br/>Especialidades.
+              {t("As Nossas", "Our")}<br/>{t("Especialidades.", "Specialties.")}
             </h2>
           </div>
           <p className="text-[#121110]/70 text-[15px] md:text-[17px] leading-[1.6] font-light max-w-[320px]">
-            Combinamos estética que capta a atenção com estratégia que transforma visitantes em clientes.
+            {t(
+              "Combinamos estética que capta a atenção com estratégia que transforma visitantes em clientes.",
+              "We combine attention-grabbing aesthetics with strategy that turns visitors into clients."
+            )}
           </p>
         </div>
 

@@ -2,10 +2,12 @@
 import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Team() {
   const container = useRef(null);
   const [activeM, setActiveM] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   useGSAP(() => {
     gsap.utils.toArray<HTMLElement>('.team-member').forEach(member => {
@@ -17,9 +19,9 @@ export default function Team() {
   }, { scope: container });
 
   const team = [
-    { name: "Eduardo", role: "Estrategista", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop", position: "center" },
-    { name: "Fredson", role: "Head de Criação", img: "/fotos/fredson.png", position: "center 20%" },
-    { name: "Miguel", role: "Engenheiro de Software", img: "/fotos/miguel.jpeg", position: "center 15%" }
+    { name: "Eduardo", role: t("Estrategista", "Strategist"), img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop", position: "center" },
+    { name: "Fredson", role: t("Head de Criação", "Creative Lead"), img: "/fotos/fredson.png", position: "center 20%" },
+    { name: "Miguel", role: t("Engenheiro de Software", "Software Engineer"), img: "/fotos/miguel.jpeg", position: "center 15%" }
   ];
 
   return (
@@ -31,9 +33,14 @@ export default function Team() {
       </div>
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="flex flex-col items-center mb-24 lg:mb-32 text-center">
-          <h2 className="font-serif text-[clamp(40px,8vw,80px)] leading-[0.85] tracking-[-0.04em] mb-8">Quem Somos.</h2>
+          <h2 className="font-serif text-[clamp(40px,8vw,80px)] leading-[0.85] tracking-[-0.04em] mb-8">
+            {t("Quem Somos.", "Who We Are.")}
+          </h2>
           <p className="text-[16px] md:text-[18px] leading-[1.6] text-[#0C0C0C]/70 max-w-lg font-light">
-            A equipa por detrás da Eleva. Jovens com visão, dedicados a transformar a presença digital de cada cliente com criatividade, estratégia e paixão pelo que fazemos.
+            {t(
+              "A equipa por detrás da Eleva. Jovens com visão, dedicados a transformar a presença digital de cada cliente com criatividade, estratégia e paixão pelo que fazemos.",
+              "The team behind Eleva. Young visionaries dedicated to transforming every client's digital presence with creativity, strategy, and passion for what we do."
+            )}
           </p>
         </div>
 

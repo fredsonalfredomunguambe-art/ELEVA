@@ -3,9 +3,11 @@ import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowDown } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Process() {
   const container = useRef(null);
+  const { t } = useLanguage();
 
   useGSAP(() => {
     // Parallax on the steps
@@ -53,10 +55,38 @@ export default function Process() {
   }, { scope: container });
 
   const processes = [
-    { num: "01", title: "Análise Inicial", desc: "Começamos por compreender o seu negócio, os seus objetivos e o seu público. Analisamos o que pode ser melhorado e definimos o caminho certo para o seu projeto." },
-    { num: "02", title: "Estratégia e Conteúdo", desc: "Antes de desenhar, escrevemos. Estruturamos os textos e a mensagem do seu site para comunicar de forma clara e persuasiva com quem realmente importa: os seus clientes." },
-    { num: "03", title: "Design e Desenvolvimento", desc: "Criamos um design único e moderno, com animações fluidas e uma experiência de navegação que transmite profissionalismo e prende a atenção do visitante." },
-    { num: "04", title: "Lançamento e Otimização", desc: "Testamos tudo ao detalhe, otimizamos a velocidade e o posicionamento nos motores de busca, e lançamos o seu site pronto para gerar resultados." }
+    { 
+      num: "01", 
+      title: t("Análise Inicial", "Initial Analysis"), 
+      desc: t(
+        "Começamos por compreender o seu negócio, os seus objetivos e o seu público. Analisamos o que pode ser melhorado e definimos o caminho certo para o seu projeto.",
+        "We start by understanding your business, your goals, and your audience. We analyse what can be improved and define the right path for your project."
+      )
+    },
+    { 
+      num: "02", 
+      title: t("Estratégia e Conteúdo", "Strategy & Content"), 
+      desc: t(
+        "Antes de desenhar, escrevemos. Estruturamos os textos e a mensagem do seu site para comunicar de forma clara e persuasiva com quem realmente importa: os seus clientes.",
+        "Before we design, we write. We structure your site's copy and messaging to communicate clearly and persuasively with who truly matters: your clients."
+      )
+    },
+    { 
+      num: "03", 
+      title: t("Design e Desenvolvimento", "Design & Development"), 
+      desc: t(
+        "Criamos um design único e moderno, com animações fluidas e uma experiência de navegação que transmite profissionalismo e prende a atenção do visitante.",
+        "We create a unique, modern design with fluid animations and a navigation experience that conveys professionalism and holds the visitor's attention."
+      )
+    },
+    { 
+      num: "04", 
+      title: t("Lançamento e Otimização", "Launch & Optimisation"), 
+      desc: t(
+        "Testamos tudo ao detalhe, otimizamos a velocidade e o posicionamento nos motores de busca, e lançamos o seu site pronto para gerar resultados.",
+        "We test everything down to the last detail, optimise speed and search engine positioning, and launch your site ready to deliver results."
+      )
+    }
   ];
 
   return (
@@ -70,10 +100,13 @@ export default function Process() {
       <div className="max-w-[1600px] mx-auto relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-32">
         <div className="lg:w-5/12 flex flex-col">
           <h2 className="font-serif text-[50px] md:text-[80px] leading-[0.85] tracking-[-0.04em] mb-8 sticky top-32">
-            Como<br/><span className="italic text-[#C5A059]">Trabalhamos.</span>
+            {t("Como", "How We")}<br/><span className="italic text-[#C5A059]">{t("Trabalhamos.", "Work.")}</span>
           </h2>
           <p className="text-[#0C0C0C]/70 text-[16px] md:text-[20px] leading-[1.6] max-w-sm sticky top-[300px]">
-             Seguimos um método comprovado para que cada projeto seja entregue com qualidade e sem surpresas.
+             {t(
+               "Seguimos um método comprovado para que cada projeto seja entregue com qualidade e sem surpresas.",
+               "We follow a proven method so every project is delivered with quality and no surprises."
+             )}
           </p>
         </div>
         

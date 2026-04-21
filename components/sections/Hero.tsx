@@ -3,9 +3,11 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ArrowDown } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Hero() {
   const container = useRef<HTMLElement>(null);
+  const { t } = useLanguage();
 
   useGSAP(() => {
     const tl = gsap.timeline();
@@ -124,7 +126,10 @@ export default function Hero() {
                   <path id="curve" d="M 20, 50 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0" fill="none" />
                   <text className="text-[7.5px] uppercase font-mono tracking-[0.25em] fill-[#121110]/80">
                     <textPath href="#curve" startOffset="0%">
-                      • DESCUBRA O NOSSO TRABALHO • DESCUBRA O NOSSO TRABALHO
+                      {t(
+                        "• DESCUBRA O NOSSO TRABALHO • DESCUBRA O NOSSO TRABALHO",
+                        "• DISCOVER OUR WORK • DISCOVER OUR WORK"
+                      )}
                     </textPath>
                   </text>
                 </svg>
@@ -141,16 +146,16 @@ export default function Hero() {
           <div className="hero-sub flex flex-col items-center md:items-end text-center md:text-right w-full md:w-1/3 order-2 md:order-3">
             <div className="flex items-center md:flex-row-reverse gap-3 mb-4">
               <span className="text-[10px] uppercase font-mono tracking-[0.3em] text-[#121110]/60 font-medium">
-                O Que Fazemos
+                {t("O Que Fazemos", "What We Do")}
               </span>
               <div className="w-6 h-[1px] bg-[#121110]/30 hidden md:block"></div>
             </div>
             <div className="text-[11px] md:text-[12px] leading-[1.8] text-[#121110]/90 uppercase tracking-[0.1em] max-w-[300px] px-4 md:px-0">
-              Sites profissionais <br className="hidden md:block"/>
-              e presença digital forte, <br className="hidden md:block"/>
-              tudo pensado para fazer crescer <br className="hidden md:block"/>
+              {t("Sites profissionais", "Professional websites")} <br className="hidden md:block"/>
+              {t("e presença digital forte,", "and a strong digital presence,")} <br className="hidden md:block"/>
+              {t("tudo pensado para fazer crescer", "all designed to grow")} <br className="hidden md:block"/>
               <span className="text-[#121110] font-serif italic normal-case text-[18px] md:text-[22px] block mt-1">
-                o seu negócio.
+                {t("o seu negócio.", "your business.")}
               </span>
             </div>
           </div>
